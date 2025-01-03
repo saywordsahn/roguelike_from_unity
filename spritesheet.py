@@ -23,7 +23,7 @@ class SpriteSheet:
         row = start[0]
         col = start[1]
 
-        while num_frames >= 0:
+        while num_frames > 0:
 
             if col >= self.num_cols:
                 row += 1

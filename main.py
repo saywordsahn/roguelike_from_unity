@@ -1,11 +1,12 @@
 import pygame
 from spritesheet import SpriteSheet
+from world import World
 
 pygame.init()
 
 
-SCREEN_WIDTH = 500
-SCREEN_HEIGHT = 500
+SCREEN_WIDTH = 700
+SCREEN_HEIGHT = 512
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -19,15 +20,16 @@ image = sprite_sheet.get_image(0, 0, 64, 64)
 
 ground_images = sprite_sheet.load_strip((4, 0), 8, 64, 64)
 
+world = World(8, 8, ground_images)
+world.create_world()
 
 while True:
 
     screen.fill((50,50,50))
 
-    for i in range(len(ground_images)):
-        screen.blit(ground_images[i], (i * 64, 0))
 
 
+    world.draw(screen)
 
     for event in pygame.event.get():
 
