@@ -1,6 +1,7 @@
 import pygame
 from spritesheet import SpriteSheet
 from world import World
+from player import Player
 
 pygame.init()
 
@@ -24,6 +25,8 @@ wall_images = sprite_sheet.load_strip((3, 1), 2, 64, 64)
 world = World(8, 8, ground_images, wall_images)
 world.create_world()
 
+player = Player(sprite_sheet.load_strip((0, 0), 6, 64, 64))
+
 while True:
 
     screen.fill((50,50,50))
@@ -31,12 +34,12 @@ while True:
 
 
     world.draw(screen)
-
+    player.draw(screen)
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
             pygame.quit()
-            exit()
+            exit(0)
 
 
     pygame.display.update()
