@@ -13,9 +13,9 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 urban_theme_image = pygame.image.load('./Sprites/UrbanTheme.png')
 
 
-sprite_sheet = SpriteSheet(urban_theme_image)
+sprite_sheet = SpriteSheet(urban_theme_image, (32, 32))
 
-image = sprite_sheet.get_image(0, 0, 32, 32)
+image = sprite_sheet.get_image(0, 0, 64, 64)
 
 
 while True:
