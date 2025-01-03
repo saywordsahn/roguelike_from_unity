@@ -1,4 +1,5 @@
 import pygame
+from spritesheet import SpriteSheet
 
 pygame.init()
 
@@ -12,19 +13,15 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 urban_theme_image = pygame.image.load('./Sprites/UrbanTheme.png')
 
 
-def get_image(sprite_sheet, row, col, width, height):
-    image = pygame.Surface((width, height)).convert_alpha()
-    image.blit(sprite_sheet, (0, 0), (row * width, col * width, width, height))
+sprite_sheet = SpriteSheet(urban_theme_image)
 
-    image = pygame.transform.scale(image, (64, 64))
-    image.set_colorkey((0, 0, 0))
-    return image
+image = sprite_sheet.get_image(0, 0, 32, 32)
 
 
 while True:
 
     screen.fill((50,50,50))
-    screen.blit(get_image(urban_theme_image, 1, 1, 32, 32), (0, 0))
+    screen.blit(image, (0, 0))
 
 
     for event in pygame.event.get():
