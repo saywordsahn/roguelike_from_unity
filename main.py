@@ -19,8 +19,9 @@ sprite_sheet = SpriteSheet(urban_theme_image, (32, 32), 7, 8)
 image = sprite_sheet.get_image(0, 0, 64, 64)
 
 ground_images = sprite_sheet.load_strip((4, 0), 8, 64, 64)
+wall_images = sprite_sheet.load_strip((3, 1), 2, 64, 64)
 
-world = World(8, 8, ground_images)
+world = World(8, 8, ground_images, wall_images)
 world.create_world()
 
 while True:
