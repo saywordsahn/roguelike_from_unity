@@ -1,4 +1,6 @@
 import pygame
+
+from animation import Animation
 from spritesheet import SpriteSheet
 from world import World
 from player import Player
@@ -26,7 +28,8 @@ obstacle_images.append(sprite_sheet.load_strip((3, 3), 5))
 world = World(8, 8, ground_images, wall_images, obstacle_images)
 world.create_world()
 
-player = Player(sprite_sheet.load_strip((0, 0), 6))
+player_idle_animation = Animation(sprite_sheet.load_strip((0, 0), 6))
+player = Player(player_idle_animation)
 
 while True:
 
