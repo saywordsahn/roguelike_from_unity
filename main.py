@@ -1,17 +1,19 @@
 import pygame
+from settings import *
 pygame.init()
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
 
 from animation import Animation
 from spritesheet import SpriteSheet
 from world import World
 from player import Player
-from settings import *
 from themes import urban_theme
 
 
 
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
 
 
 world = World(8, 8, urban_theme)
