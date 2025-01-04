@@ -2,12 +2,12 @@ import random as rand
 
 class World:
 
-    def __init__(self, rows, cols, ground_tiles, wall_tiles, obstacle_tiles):
+    def __init__(self, rows, cols, world_theme):
         self.num_rows = rows
         self.num_cols = cols
-        self.ground_tiles = ground_tiles
-        self.wall_tiles = wall_tiles
-        self.obstacle_tiles = obstacle_tiles
+        self.ground_tiles = world_theme.ground_images
+        self.wall_tiles = world_theme.wall_images
+        self.obstacle_tiles = world_theme.obstacle_images
         self.tiles = []
 
     def create_world(self):
