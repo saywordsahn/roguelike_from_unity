@@ -2,21 +2,22 @@ import pygame
 
 class SpriteSheet:
 
-    def __init__(self, image, cell_size, num_rows, num_cols):
+    def __init__(self, image, cell_size, num_rows, num_cols, scale=1):
         self.image = image
         self.cell_size = cell_size
         self.num_rows = num_rows
         self.num_cols = num_cols
+        self.scale = scale
 
-    def get_image(self, row, col, width, height):
+    def get_image(self, row, col, scale=1):
         image = pygame.Surface((self.cell_size[0], self.cell_size[1])).convert_alpha()
         image.blit(self.image, (0, 0), (col * self.cell_size[0], row * self.cell_size[1], self.cell_size[0], self.cell_size[1]))
 
-        image = pygame.transform.scale(image, (width, height))
+        image = pygame.transform.scale(image, (self.cell_size * self.scale, self.cell_size * self.scale))
         image.set_colorkey((0, 0, 0))
         return image
 
-    def load_strip(self, start, num_frames, width, height):
+    def load_strip(self, start, num_frames):
 
         strip = []
 
@@ -29,7 +30,7 @@ class SpriteSheet:
                 row += 1
                 col = 0
             else:
-                image = self.get_image(row, col, width, height)
+                image = self.get_image(row, col, self.scale)
                 strip.append(image)
                 col += 1
                 num_frames -= 1

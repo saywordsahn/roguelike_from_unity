@@ -17,15 +17,18 @@ urban_theme_image = pygame.image.load('./Sprites/UrbanTheme.png')
 
 sprite_sheet = SpriteSheet(urban_theme_image, (32, 32), 7, 8)
 
-image = sprite_sheet.get_image(0, 0, 64, 64)
+image = sprite_sheet.get_image(0, 0)
 
-ground_images = sprite_sheet.load_strip((4, 0), 8, 64, 64)
-wall_images = sprite_sheet.load_strip((3, 1), 2, 64, 64)
+ground_images = sprite_sheet.load_strip((4, 0), 8)
+wall_images = sprite_sheet.load_strip((3, 1), 2)
+obstacle_images = sprite_sheet.load_strip((2, 5), 4)
+obstacle_images.append(sprite_sheet.load_strip((3, 3), 5))
 
-world = World(8, 8, ground_images, wall_images)
+
+world = World(8, 8, ground_images, wall_images, obstacle_images)
 world.create_world()
 
-player = Player(sprite_sheet.load_strip((0, 0), 6, 64, 64))
+player = Player(sprite_sheet.load_strip((0, 0), 6))
 
 while True:
 
