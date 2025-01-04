@@ -10,13 +10,12 @@ pygame.init()
 
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 512
+FPS = 60
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
 urban_theme_image = pygame.image.load('./Sprites/UrbanTheme.png')
-
-
 sprite_sheet = SpriteSheet(urban_theme_image, (32, 32), 7, 8, 2)
 
 ground_images = sprite_sheet.load_strip((4, 0), 8)
@@ -31,14 +30,19 @@ world.create_world()
 player_idle_animation = Animation(sprite_sheet.load_strip((0, 0), 6))
 player = Player(player_idle_animation)
 
+clock = pygame.time.Clock()
+
 while True:
 
+    dt = clock.tick(FPS)
+
+
     screen.fill((50,50,50))
-
-
-
     world.draw(screen)
     player.draw(screen)
+
+    player.update(dt)
+
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:

@@ -9,4 +9,7 @@ class Player:
         self.current_image = self.idle_animation.get_current_image()
 
     def draw(self, screen):
-        screen.blit(self.current_image, (self.col * 64, self.row * 64))
+        screen.blit(self.idle_animation.get_current_image(), (self.col * 64, self.row * 64))
+
+    def update(self, dt):
+        self.idle_animation.update(dt)
