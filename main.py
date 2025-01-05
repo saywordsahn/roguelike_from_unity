@@ -41,5 +41,17 @@ while True:
             pygame.quit()
             exit(0)
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_d:
+                player.move(Direction.RIGHT)
+            elif event.key == pygame.K_a:
+                player.move(Direction.LEFT)
+            elif event.key == pygame.K_w:
+                player.move(Direction.UP)
+            elif event.key == pygame.K_s:
+                player.move(Direction.DOWN)
+
+
+
 
     pygame.display.update()

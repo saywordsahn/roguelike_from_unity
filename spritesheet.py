@@ -10,6 +10,13 @@ class SpriteSheet:
         self.scale = scale
 
     def get_image(self, row, col, scale=1):
+        """
+        Get a single image from a SpriteSheet
+        :param row: the row in the SpriteSheet (top = 0)
+        :param col: the col in the SpriteSheet (left = 0)
+        :param scale: how much scale should be applied to the original SpriteSheet
+        :return: The image from the SpriteSheet, scaled
+        """
         image = pygame.Surface((self.cell_size[0], self.cell_size[1])).convert_alpha()
         image.blit(self.image, (0, 0), (col * self.cell_size[0], row * self.cell_size[1], self.cell_size[0], self.cell_size[1]))
 
