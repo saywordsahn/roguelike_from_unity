@@ -41,7 +41,7 @@ while True:
             pygame.quit()
             exit(0)
 
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN and player.state == PlayerState.IDLE:
             if event.key == pygame.K_d:
                 player.move(Direction.RIGHT)
             elif event.key == pygame.K_a:

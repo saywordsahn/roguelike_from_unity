@@ -7,6 +7,9 @@ SCREEN_HEIGHT = 512
 FPS = 60
 TILE_SIZE = (32, 32)
 SCALE = 2
+LERP_BREAK_DISTANCE = 0.1
+UNIT_MOVE_SPEED = 10.0
+
 
 class Direction(enum.Enum):
     LEFT = 1,
@@ -28,8 +31,6 @@ class Vector2:
 
 
 def grid_to_world(grid_position) -> Tuple[float, float]:
-
-    print(grid_position.x, grid_position.y)
     return grid_position.y * TILE_SIZE[0] * SCALE, grid_position.x * TILE_SIZE[1] * SCALE
 
 # def grid_to_world(row, col) -> Tuple[int, int]:

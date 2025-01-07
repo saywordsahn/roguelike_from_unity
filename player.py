@@ -7,7 +7,7 @@ class Player:
         self.grid_position = pygame.Vector2(1, 1)
         self.idle_animation = idle_animation
         self.state = PlayerState.IDLE
-        self.move_speed = 3
+        self.destination = self.grid_position
 
     def draw(self, screen) -> None:
         screen.blit(self.idle_animation.get_current_image(), grid_to_world(self.grid_position))
@@ -15,20 +15,23 @@ class Player:
     def update(self, dt):
         self.idle_animation.update(dt)
 
-        # if self.state == PlayerState.MOVING:
-        #     self.col += self.move_speed * dt / 1000.0
+        if self.state == PlayerState.MOVING:
+            self.grid_position = self.grid_position.lerp(self.destination, dt * UNIT_MOVE_SPEED / 1000)
 
+            if self.grid_position.distance_to(self.destination) <= LERP_BREAK_DISTANCE:
+                self.grid_position = self.destination
+                self.state = PlayerState.IDLE
 
     def move(self, direction: Direction) -> None:
 
         if direction == Direction.RIGHT:
-            self.grid_position += Vector2.RIGHT
+            self.destination = self.grid_position + Vector2.RIGHT
         elif direction == Direction.LEFT:
-            self.grid_position += Vector2.LEFT
+            self.destination = self.grid_position + Vector2.LEFT
         elif direction == Direction.UP:
-            self.grid_position += Vector2.UP
+            self.destination = self.grid_position + Vector2.UP
         else:
-            self.grid_position += Vector2.DOWN
+            self.destination = self.grid_position + Vector2.DOWN
 
         self.state = PlayerState.MOVING
 
