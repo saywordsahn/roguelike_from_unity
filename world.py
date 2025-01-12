@@ -20,6 +20,7 @@ class World:
         self.wall_tiles = world_theme.wall_images
         self.obstacle_tiles = world_theme.obstacle_images
         self.tiles = []
+        self.empty_cells = []
 
     def create_world(self):
         self.tiles = []
@@ -30,9 +31,19 @@ class World:
                 if j == 0 or j == self.num_rows - 1 or i == 0 or i == self.num_cols - 1:
                     row.append(CellData(rand.choice(self.wall_tiles), False))
                 else:
-                    row.append(CellData(rand.choice(self.ground_tiles), True))
+                    cell = CellData(rand.choice(self.ground_tiles), True)
+                    row.append(cell)
+                    self.empty_cells.append(cell)
 
             self.tiles.append(row)
+
+    def spawn_obstacles(self):
+
+        for i in range(3):
+            cell: CellData = rand.choice(self.empty_cells)
+            cell.tile = rand.choice(self.obstacle_tiles)
+            cell.is_passable = False
+            self.empty_cells.remove(cell)
 
     def draw(self, screen):
         for i in range(self.num_rows):
