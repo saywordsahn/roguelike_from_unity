@@ -1,5 +1,10 @@
 import random as rand
 
+import pygame
+
+from settings import *
+
+
 class CellData:
 
     def __init__(self, tile, is_passable):
@@ -33,3 +38,18 @@ class World:
         for i in range(self.num_rows):
             for j in range(self.num_cols):
                 screen.blit(self.tiles[i][j].tile, (j * 64, i * 64))
+
+    @staticmethod
+    def get_adjacent_pos(position: pygame.Vector2, direction: Direction):
+
+        if direction == Direction.RIGHT:
+            return position + Vector2.RIGHT
+        elif direction == Direction.LEFT:
+            return position + Vector2.LEFT
+        elif direction == Direction.UP:
+            return position + Vector2.UP
+        else:
+            return position + Vector2.DOWN
+
+    def is_passable(self, position: pygame.Vector2):
+        return self.tiles[int(position.x)][int(position.y)].is_passable

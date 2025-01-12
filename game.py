@@ -25,13 +25,23 @@ class Game:
     def update(self, dt):
         self.player.update(dt)
 
+    def player_can_move_to(self, direction: Direction):
+        if self.world.is_passable(self.world.get_adjacent_pos(self.player.grid_position, direction)):
+            return True
+
+        return False
+
     def handle_input(self, event):
         if event.type == pygame.KEYDOWN and self.player.state == PlayerState.IDLE:
             if event.key == pygame.K_d:
-                self.player.move(Direction.RIGHT)
+                if self.player_can_move_to(Direction.RIGHT):
+                    self.player.move(Direction.RIGHT)
             elif event.key == pygame.K_a:
-                self.player.move(Direction.LEFT)
+                if self.player_can_move_to(Direction.LEFT):
+                    self.player.move(Direction.LEFT)
             elif event.key == pygame.K_w:
-                self.player.move(Direction.UP)
+                if self.player_can_move_to(Direction.UP):
+                    self.player.move(Direction.UP)
             elif event.key == pygame.K_s:
-                self.player.move(Direction.DOWN)
+                if self.player_can_move_to(Direction.DOWN):
+                    self.player.move(Direction.DOWN)
