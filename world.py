@@ -1,5 +1,5 @@
 import random as rand
-
+from enemy import Enemy
 import pygame
 
 from settings import *
@@ -7,9 +7,10 @@ from settings import *
 
 class CellData:
 
-    def __init__(self, tile, is_passable):
+    def __init__(self, tile, is_passable, game_object=None):
         self.tile = tile
         self.is_passable = is_passable
+        self.game_object = game_object
 
 class World:
 
@@ -43,6 +44,13 @@ class World:
             cell: CellData = rand.choice(self.empty_cells)
             cell.tile = rand.choice(self.obstacle_tiles)
             cell.is_passable = False
+            self.empty_cells.remove(cell)
+
+    def spawn_enemies(self):
+        for i in range(3):
+            cell: CellData = rand.choice(self.empty_cells)
+            cell.is_passable = False
+            cell.game_object = Enemy()
             self.empty_cells.remove(cell)
 
     def draw(self, screen):

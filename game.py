@@ -18,6 +18,7 @@ class Game:
     def reset(self):
         self.world.create_world()
         self.world.spawn_obstacles()
+        self.world.spawn_enemies()
 
     def draw(self, screen):
         self.world.draw(screen)
