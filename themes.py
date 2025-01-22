@@ -14,4 +14,4 @@ obstacle_images = sprite_sheet.load_strip((2, 5), 4)
 # obstacle_images.append(sprite_sheet.load_strip((3, 3), 5))
 enemy_idle_images = sprite_sheet.load_strip((0, 6), 6)
 
-urban_theme = WorldTheme(sprite_sheet, ground_images, wall_images, obstacle_images)
+urban_theme = WorldTheme(sprite_sheet, ground_images, wall_images, obstacle_images, enemy_idle_images)
