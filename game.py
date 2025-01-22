@@ -1,5 +1,6 @@
 import pygame
 
+from enemy_manager import EnemyManager
 from settings import *
 from themes import urban_theme
 from world import World
@@ -13,6 +14,7 @@ class Game:
         self.world = World(8, 8, urban_theme)
         player_idle_animation = Animation(urban_theme.sprite_sheet.load_strip((0, 0), 6))
         self.player = Player(player_idle_animation)
+        self.enemy_manager = EnemyManager()
         self.reset()
 
     def reset(self):
@@ -26,6 +28,7 @@ class Game:
 
     def update(self, dt):
         self.player.update(dt)
+        self.world.update(dt)
 
     def player_can_move_to(self, direction: Direction):
         if self.world.is_passable(self.world.get_adjacent_pos(self.player.grid_position, direction)):

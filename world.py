@@ -27,7 +27,8 @@ class World:
         self.obstacle_tiles = world_theme.obstacle_images
         self.tiles: list[list[CellData]] = []
         self.empty_cells = []
-        self.enemy_manager = EnemyManager()
+        self.game_objects = []
+
 
     def create_world(self):
         self.tiles = []
@@ -52,11 +53,16 @@ class World:
             cell.is_passable = False
             self.empty_cells.remove(cell)
 
+    def add_game_object(self, cell, obj):
+        cell.game_object = obj
+        self.game_objects.append(obj)
+
     def spawn_enemies(self):
         for i in range(3):
             cell: CellData = rand.choice(self.empty_cells)
+            enemy = Enemy(cell.position, EnemyManager.get_animation())
             cell.is_passable = False
-            cell.game_object = Enemy(cell.position, EnemyManager.get_animation())
+            self.add_game_object(cell, enemy)
             self.empty_cells.remove(cell)
 
     def draw(self, screen):
@@ -65,6 +71,10 @@ class World:
                 screen.blit(self.tiles[i][j].tile, (j * 64, i * 64))
                 if self.tiles[i][j].has_game_object():
                     self.tiles[i][j].game_object.draw(screen)
+
+    def update(self, dt):
+        for obj in self.game_objects:
+            obj.update(dt)
 
     @staticmethod
     def get_adjacent_pos(position: pygame.Vector2, direction: Direction):
