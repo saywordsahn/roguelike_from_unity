@@ -1,6 +1,7 @@
 import pygame
 
 from enemy_manager import EnemyManager
+from game_object import GameObjectType
 from settings import *
 from themes import urban_theme
 from world import World
@@ -14,7 +15,6 @@ class Game:
         self.world = World(8, 8, urban_theme)
         player_idle_animation = Animation(urban_theme.sprite_sheet.load_strip((0, 0), 6))
         self.player = Player(player_idle_animation)
-        self.enemy_manager = EnemyManager()
         self.reset()
 
     def reset(self):
@@ -36,17 +36,32 @@ class Game:
 
         return False
 
+    def enemy_turn(self):
+        enemies = self.world.get_game_objects_of_type(GameObjectType.Enemy)
+
+        for enemy in enemies:
+            print('enemy', enemy, 'takes turn')
+
     def handle_input(self, event):
         if event.type == pygame.KEYDOWN and self.player.state == PlayerState.IDLE:
+
+            player_has_moved = False
             if event.key == pygame.K_d:
                 if self.player_can_move_to(Direction.RIGHT):
                     self.player.move(Direction.RIGHT)
+                    player_has_moved = True
             elif event.key == pygame.K_a:
                 if self.player_can_move_to(Direction.LEFT):
                     self.player.move(Direction.LEFT)
+                    player_has_moved = True
             elif event.key == pygame.K_w:
                 if self.player_can_move_to(Direction.UP):
                     self.player.move(Direction.UP)
+                    player_has_moved = True
             elif event.key == pygame.K_s:
                 if self.player_can_move_to(Direction.DOWN):
                     self.player.move(Direction.DOWN)
+                    player_has_moved = True
+
+            if player_has_moved:
+                self.enemy_turn()

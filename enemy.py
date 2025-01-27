@@ -1,8 +1,10 @@
 from animation import Animation
+from game_object import GameObject, GameObjectType
 
-class Enemy:
+class Enemy(GameObject):
 
     def __init__(self, position, idle_animation: Animation):
+        GameObject.__init__(self, GameObjectType.Enemy)
         self.idle_animation = idle_animation
         self.position = position
 

@@ -1,5 +1,6 @@
 import random as rand
 from enemy import Enemy
+from game_object import GameObject, GameObjectType
 import pygame
 
 from enemy_manager import EnemyManager
@@ -8,7 +9,7 @@ from settings import *
 
 class CellData:
 
-    def __init__(self, position, tile, is_passable, game_object=None):
+    def __init__(self, position, tile, is_passable, game_object: GameObject=None):
         self.position = position
         self.tile = tile
         self.is_passable = is_passable
@@ -75,6 +76,13 @@ class World:
     def update(self, dt):
         for obj in self.game_objects:
             obj.update(dt)
+
+    def get_game_objects_of_type(self, gotype: GameObjectType):
+        objs = []
+        for obj in self.game_objects:
+            if obj.game_object_type == gotype:
+                objs.append(obj)
+        return objs
 
     @staticmethod
     def get_adjacent_pos(position: pygame.Vector2, direction: Direction):
