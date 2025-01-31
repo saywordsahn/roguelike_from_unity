@@ -22,6 +22,11 @@ class PlayerState(enum.Enum):
     MOVING = 2,
     ATTACKING = 3
 
+class PlayerAction(enum.Enum):
+    MOVE = 1,
+    ATTACK = 2,
+    PICKUP_ITEM = 3
+
 class Vector2:
 
     RIGHT = pygame.Vector2(0, 1)

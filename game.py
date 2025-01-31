@@ -42,6 +42,16 @@ class Game:
         for enemy in enemies:
             print('enemy', enemy, 'takes turn')
 
+    def get_player_move(self, direction: Direction) -> PlayerAction:
+        # if enemy or debris attack
+        # if open space move
+        # else return false
+
+
+        if self.player_can_move_to(direction):
+            return PlayerAction.MOVE
+
+
     def handle_input(self, event):
         if event.type == pygame.KEYDOWN and self.player.state == PlayerState.IDLE:
 
